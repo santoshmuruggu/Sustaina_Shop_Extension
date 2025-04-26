@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "SustainaShop AI",
+  "description": "Sustainability scoring tool for Amazon and Flipkart.",
+  "version": "1.0",
+  "icons": {
+    "128": "icon.png"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "tabs",
+    "https://api-inference.huggingface.co/*"
+  ],
+  "content_scripts": [
+  {
+    "matches": ["*://www.amazon.in/*", "*://www.flipkart.com/*"],
+    "js": ["content.js", "floatingBadge.js"]
+  }
+],
+
+  "web_accessible_resources": [
+    {
+      "resources": ["brand_db.json"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  }
+}
